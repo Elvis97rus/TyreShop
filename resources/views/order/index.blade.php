@@ -14,7 +14,7 @@
                     <th class="text-left p-2">Status</th>
                     <th class="text-left p-2">SubTotal</th>
                     <th class="text-left p-2">Items</th>
-                    <th class="text-left p-2">Actions</th>
+                    <th class="hidden text-left p-2">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                         </td>
                         <td class="py-1 px-2">&#8381;{{$order->total_price}}</td>
                         <td class="py-1 px-2 whitespace-nowrap">{{$order->items_count}} item(s)</td>
-                        <td class="py-1 px-2 flex gap-2 w-[100px]">
+                        <td class="hidden py-1 px-2 flex gap-2 w-[100px]">
                             @if (!$order->isPaid())
                                 <form action="{{ route('cart.checkout-order', $order) }}"
                                       method="POST">

@@ -64,26 +64,26 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Product $product
+     * @param \App\Models\Product $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $product)
+    public function show(Category $category)
     {
-        return new CategoryResource($product);
+        return new CategoryResource($category);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product      $product
+     * @param \App\Models\Product      $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $product)
+    public function update(CategoryRequest $request, Category $category)
     {
         $data = $request->validated();
         $data['updated_by'] = $request->user()->id;
-
+//        dd($data);
         /** @var \Illuminate\Http\UploadedFile $image */
         $image = $data['image'] ?? null;
         // Check if image was given and save on local file system
@@ -92,25 +92,25 @@ class CategoryController extends Controller
             $data['image'] = URL::to(Storage::url($relativePath));
 
             // If there is an old image, delete it
-            if ($product->image) {
-                Storage::deleteDirectory('/public/' . dirname($product->image));
+            if ($category->image) {
+                Storage::deleteDirectory('/public/' . dirname($category->image));
             }
         }
 
-        $product->update($data);
+        $category->update($data);
 
-        return new CategoryResource($product);
+        return new CategoryResource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Product $product
+     * @param \App\Models\Product $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $product)
+    public function destroy(Category $category)
     {
-        $product->delete();
+        $category->delete();
 
         return response()->noContent();
     }

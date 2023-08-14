@@ -22,7 +22,7 @@ class CheckoutController extends Controller
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+//        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
         [$products, $cartItems] = Cart::getProductsAndCartItems();
 
@@ -49,16 +49,13 @@ class CheckoutController extends Controller
                 'unit_price' => $product->price
             ];
         }
-//        dd(route('checkout.failure', [], true));
 
-//        dd(route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}');
-
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout.failure', [], true),
-        ]);
+//        $session = \Stripe\Checkout\Session::create([
+//            'line_items' => $lineItems,
+//            'mode' => 'payment',
+//            'success_url' => route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
+//            'cancel_url' => route('checkout.failure', [], true),
+//        ]);
 
         // Create Order
         $orderData = [
@@ -76,20 +73,22 @@ class CheckoutController extends Controller
         }
 
         // Create Payment
-        $paymentData = [
-            'order_id' => $order->id,
-            'amount' => $totalPrice,
-            'status' => PaymentStatus::Pending,
-            'type' => 'cc',
-            'created_by' => $user->id,
-            'updated_by' => $user->id,
-            'session_id' => $session->id
-        ];
-        Payment::create($paymentData);
+//        $paymentData = [
+//            'order_id' => $order->id,
+//            'amount' => $totalPrice,
+//            'status' => PaymentStatus::Pending,
+//            'type' => 'cc',
+//            'created_by' => $user->id,
+//            'updated_by' => $user->id,
+//            'session_id' => $session->id
+//        ];
+//        Payment::create($paymentData);
 
         CartItem::where(['user_id' => $user->id])->delete();
 
-        return redirect($session->url);
+        $customer = auth()->user();
+        return view('checkout.success', compact('customer'));
+//        return redirect($session->url);
     }
 
     public function success(Request $request)

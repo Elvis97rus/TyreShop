@@ -46,6 +46,7 @@
                 <div class="bg-white px-4 pt-5 pb-4">
                   <CustomInput class="mb-2" v-model="category.name" label="category name"/>
                   <CustomInput class="mb-2" v-model="category.slug" label="slug" />
+                  <CustomInput class="mb-2" v-model="category.type" label="type" />
                   <CustomInput type="file" class="mb-2" label="category Image" @change="file => category.image = file"/>
                   <CustomInput type="textarea" class="mb-2" v-model="category.description" label="Description"/>
                   <CustomInput type="textarea" class="mb-2" v-model="category.meta_title" label="meta_title"/>
@@ -85,6 +86,7 @@ const category = ref({
   name: props.category.name,
   description: props.category.description,
   slug: props.category.slug,
+  type: props.category.type,
   image: props.category.image,
   meta_title: props.category.meta_title,
   meta_description: props.category.meta_description
@@ -113,6 +115,7 @@ onUpdated(() => {
     name: props.category.name,
     description: props.category.description,
     slug: props.category.slug,
+    type: props.category.type,
     image: props.category.image,
     meta_title: props.category.meta_title,
     meta_description: props.category.meta_description,
@@ -123,6 +126,8 @@ function closeModal() {
   show.value = false
   emit('close')
 }
+
+console.log(category)
 
 function onSubmit() {
   loading.value = true

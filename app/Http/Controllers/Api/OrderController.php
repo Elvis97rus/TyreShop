@@ -40,6 +40,7 @@ class OrderController extends Controller
     public function view(Order $order)
     {
         $order->load('items.product');
+//        dd($order);
         return new OrderResource($order);
     }
 

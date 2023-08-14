@@ -23,6 +23,7 @@ const DEFAULT_CATEGORY = {
   name: '',
   description: '',
   slug: '',
+  type: '',
   image: '',
   meta_description: '',
   meta_title: ''
@@ -38,8 +39,10 @@ function showAddNewModal() {
 }
 
 function editCategory(c) {
+
   store.dispatch('getCategory', c.id)
     .then(({data}) => {
+      console.log(data)
       categoryModel.value = data
       showAddNewModal();
     })
