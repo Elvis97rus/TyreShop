@@ -235,6 +235,10 @@ export function getCategories({commit, state}, {url = null, search = '', per_pag
     })
 }
 
+export function getCategory({commit}, id) {
+  return axiosClient.get(`/categories/${id}`)
+}
+
 export function deleteCategory({commit}, id) {
   return axiosClient.delete(`/categories/${id}`)
 }

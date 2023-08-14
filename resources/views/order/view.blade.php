@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td class="font-bold py-1 px-2">SubTotal</td>
-                    <td>${{ $order->total_price }}</td>
+                    <td>&#8381;{{ $order->total_price }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -54,7 +54,7 @@
                 <hr class="my-3"/>
             @endforeach
 
-            @if (!$order->isPaid())
+            @if (!$order->isPaid() && false)
                 <form action="{{ route('cart.checkout-order', $order) }}"
                       method="POST">
                     @csrf

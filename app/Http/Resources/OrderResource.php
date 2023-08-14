@@ -21,7 +21,7 @@ class OrderResource extends JsonResource
         $customer = $this->user->customer;
         $shipping = $customer->shippingAddress;
         $billing = $customer->billingAddress;
-
+//        dd($this, $customer);
         return [
             'id' => $this->id,
             'status' => $this->status,
@@ -34,7 +34,7 @@ class OrderResource extends JsonResource
                     'id' => $item->product->id,
                     'slug' => $item->product->slug,
                     'title' => $item->product->title,
-                    'image' => $item->product->image,
+                    'image' => $item->product->img_small,
                 ]
             ]),
             'customer' => [
@@ -44,22 +44,22 @@ class OrderResource extends JsonResource
                 'last_name' => $customer->last_name,
                 'phone' => $customer->phone,
                 'shippingAddress' => [
-                    'id' => $shipping->id,
-                    'address1' => $shipping->address1,
-                    'address2' => $shipping->address2,
-                    'city' => $shipping->city,
-                    'state' => $shipping->state,
-                    'zipcode' => $shipping->zipcode,
-                    'country' => $shipping->country->name,
+                    'id' => $shipping->id ?? '[not-set]',
+                    'address1' => $shipping->address1 ?? '[not-set]',
+                    'address2' => $shipping->address2 ?? '[not-set]',
+                    'city' => $shipping->city ?? '[not-set]',
+                    'state' => $shipping->state ?? '[not-set]',
+                    'zipcode' => $shipping->zipcode ?? '[not-set]',
+                    'country' => $shipping->country->name ?? '[not-set]',
                 ],
                 'billingAddress' => [
-                    'id' => $billing->id,
-                    'address1' => $billing->address1,
-                    'address2' => $billing->address2,
-                    'city' => $billing->city,
-                    'state' => $billing->state,
-                    'zipcode' => $billing->zipcode,
-                    'country' => $billing->country->name,
+                    'id' => $billing->id ?? '[not-set]',
+                    'address1' => $billing->address1 ?? '[not-set]',
+                    'address2' => $billing->address2 ?? '[not-set]',
+                    'city' => $billing->city ?? '[not-set]',
+                    'state' => $billing->state ?? '[not-set]',
+                    'zipcode' => $billing->zipcode ?? '[not-set]',
+                    'country' => $billing->country->name ?? '[not-set]',
                 ]
             ],
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),

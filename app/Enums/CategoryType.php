@@ -9,8 +9,7 @@ namespace App\Enums;
  * @author
  * @package App\Enums
  */
-enum AddressType: string
+enum CategoryType: string
 {
-    case Shipping = 'shipping';
-    case Billing = 'billing';
+    case Brand = 'brand';
 }

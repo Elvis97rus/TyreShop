@@ -20,6 +20,7 @@ class CategoryController extends Controller
 
     public function view(Category $category)
     {
+//        dd($category);
         return view('category.view', ['category' => $category]);
     }
 }

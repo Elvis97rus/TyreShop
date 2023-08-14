@@ -79,12 +79,14 @@
                             <div class="flex flex-col justify-end">
                                 @if(is_array($rest = json_decode($product->rest)))
                                     @foreach($rest as $item)
-                                        <p class="font-semibold mt-2">Остаток: {{$item->rest}}</p>
-                                        <p class="font-semibold">Склад: {{$item->wrh}}</p>
+                                        <p class="font-semibold mt-2">Остаток: {{$item->rest}} шт.</p>
+                                        <p class="font-semibold">Склад: №{{$item->wrh}}</p>
+                                        <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($item->wrh)}} д.</p>
                                     @endforeach
                                 @else
-                                    <p class="font-semibold">Остаток: {{$rest->rest}}</p>
-                                    <p class="font-semibold">Склад: {{$rest->wrh}}</p>
+                                    <p class="font-semibold">Остаток: {{$rest->rest}} шт.</p>
+                                    <p class="font-semibold">Склад: №{{$rest->wrh}}</p>
+                                    <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($rest->wrh)}} д.</p>
                                 @endif
 
                             </div>

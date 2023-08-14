@@ -1,9 +1,4 @@
 <?php
-/**
- * User: Zura
- * Date: 8/16/2022
- * Time: 5:26 AM
- */
 
 namespace App\Helpers;
 

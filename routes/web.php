@@ -23,7 +23,7 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('home');
     Route::post('/', [ProductController::class, 'search'])->name('home.search');
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-    Route::get('/categories/{category:slug}', [ProductController::class, 'view'])->name('category.view');
+    Route::get('/categories/{category:slug}', [CategoryController::class, 'view'])->name('category.view');
     Route::get('/product/{product:slug}', [ProductController::class, 'view'])->name('product.view');
 
     Route::prefix('/cart')->name('cart.')->group(function () {
