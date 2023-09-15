@@ -31,6 +31,7 @@ class CustomerRequest extends FormRequest
             'phone' => ['required', 'min:7'],
             'email' => ['required', 'email'],
             'status' => ['required', 'boolean'],
+            'is_manager' => ['required', 'boolean'],
 
             'shippingAddress.address1' => ['required'],
             'shippingAddress.address2' => ['required'],

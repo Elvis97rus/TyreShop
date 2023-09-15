@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('meta_title', $product->meta_title ?? $product->title)
+    @section('meta_description', $product->meta_description ?? $product->title)
     <div  x-data="productItem({{ json_encode([
                     'id' => $product->id,
                     'slug' => $product->slug,
@@ -95,29 +97,35 @@
                 <h1 class="text-lg font-semibold">
                     {{$product->title}}
                 </h1>
-                <div class="flex justify-between mt-4">
-                    <div class="text-xl font-bold mb-6">
-                        <p class="font-semibold text-gray-400 py-2">Опт. &#8381;{{$product->price_opt}}</p>
-                        <p class="font-semibold text-gray-400">Розн. &#8381;{{$product->price_rozn}}</p>
-                        <p class="font-bold py-2">Цена: &#8381;{{$product->price}}</p>
-                    </div>
+                <div class="flex flex-col sm:flex-row justify-between mt-4">
                     <div class="text-xl font-bold flex flex-col">
                         @if(is_array($rest = json_decode($product->rest)))
                             @foreach($rest as $item)
                                 <p class="font-semibold mt-2">Остаток: {{$item->rest}}</p>
                                 <p class="font-semibold">Склад: {{$item->wrh}}</p>
-                                <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($item->wrh)}} д.</p>
+                                <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($item->wrh) != '0' ?: '1'}} д.</p>
                             @endforeach
                         @else
                             <p class="font-semibold">Остаток: {{$rest->rest}}</p>
                             <p class="font-semibold">Склад: {{$rest->wrh}}</p>
-                            <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($rest->wrh)}} д.</p>
+                            <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($rest->wrh) != '0' ?: '1'}} д.</p>
                         @endif
+                    </div>
+                    <div class="text-xl font-bold mb-6">
+                        @if(auth()->user() && (!auth()->user()->customer || auth()->user()->customer->is_manager))
+                            <p class="font-semibold text-gray-400 py-2">Опт. &#8381;{{$product->price_opt}}</p>
+                            <p class="font-semibold text-gray-400">Розн. &#8381;{{$product->price_rozn}}</p>
+                            <p class="font-bold py-2">Цена: &#8381;{{$product->price}}</p>
+                        @else
+                            <p class="font-semibold text-gray-400 line-through">Цена: &#8381;{{$product->price_rozn}}</p>
+                            <p class="font-bold py-2">Цена: &#8381;{{$product->price}}</p>
+                        @endif
+
                     </div>
                 </div>
                 <div class="flex items-center justify-between mb-5">
                     <label for="quantity" class="block font-bold mr-4">
-                        Quantity
+                        Количество
                     </label>
                     <input
                         type="number"
@@ -146,7 +154,7 @@
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                     </svg>
-                    Add to Cart
+                    Добавить в корзину
                 </button>
                 <div class="mb-6" x-data="{expanded: false}">
                     <div
@@ -154,14 +162,14 @@
                         x-collapse.min.120px
                         class="text-gray-500 wysiwyg-content"
                     >
-                        {{ $product->description }}
+                        {{ $product->description }} <p>Какое то невероятное СЕО описание которое можно скрыть кликнув по кнопке.</p> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus minus, repellendus. Ab architecto, dignissimos dolor facilis iusto minus nam necessitatibus, nemo nobis sit temporibus totam veniam voluptas! Amet at corporis explicabo quisquam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus minus, repellendus. Ab architecto, dignissimos dolor facilis iusto minus nam necessitatibus, nemo nobis sit temporibus totam veniam voluptas! Amet at corporis explicabo quisquam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus minus, repellendus. Ab architecto, dignissimos dolor facilis iusto minus nam necessitatibus, nemo nobis sit temporibus totam veniam voluptas! Amet at corporis explicabo quisquam?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus minus, repellendus. Ab architecto, dignissimos dolor facilis iusto minus nam necessitatibus, nemo nobis sit temporibus totam veniam voluptas! Amet at corporis explicabo quisquam?</p>
                     </div>
                     <p class="text-right">
                         <a
                             @click="expanded = !expanded"
                             href="javascript:void(0)"
                             class="text-purple-500 hover:text-purple-700"
-                            x-text="expanded ? 'Read Less' : 'Read More'"
+                            x-text="expanded ? 'Скрыть описание' : 'Читать описание'"
                         ></a>
                     </p>
                 </div>

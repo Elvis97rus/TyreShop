@@ -7,8 +7,8 @@
     class="flex justify-between bg-slate-800 shadow-md text-white"
 >
     <div class="flex">
-        <a href="{{ route('home') }}" class="inline-block py-navbar-item py-5 pl-5 {{ request()->route()->getName() === 'home' ? 'underline font-bold' : '' }}"> Products </a>
-        <a href="{{ route('categories') }}" class="inline-block py-navbar-item py-5 pl-5 {{ request()->route()->getName() === 'categories' ? 'underline font-bold' : '' }}"> Brands </a>
+        <a href="{{ route('home') }}" class="inline-block py-navbar-item py-5 pl-5 {{ request()->route()->getName() === 'home' ? 'font-bold' : '' }}"> Шины </a>
+        <a href="{{ route('categories') }}" class="inline-block py-navbar-item py-5 pl-5 {{ request()->route()->getName() === 'categories' ? 'font-bold' : '' }}"> Марки / Бренды </a>
     </div>
     <!-- Responsive Menu -->
     <div
@@ -36,7 +36,7 @@
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                             />
                         </svg>
-                        Cart
+                        Корзина
                     </div>
                     <!-- Cart Items Counter -->
                     <small
@@ -70,7 +70,7 @@
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                My Account
+                Аккаунт
               </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                                     />
                                 </svg>
-                                My Profile
+                                Профиль
                             </a>
                         </li>
                         <li class="hover:bg-slate-900">
@@ -128,7 +128,7 @@
                                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                                     />
                                 </svg>
-                                My Orders
+                                Заказы
                             </a>
                         </li>
                         <li class="hover:bg-slate-900">
@@ -154,7 +154,7 @@
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                         />
                                     </svg>
-                                    {{ __('Log Out') }}
+                                    {{ __('Выйти') }}
                                 </a>
                             </form>
                         </li>
@@ -180,7 +180,7 @@
                                 d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                             />
                         </svg>
-                        Login
+                        Войти
                     </a>
                 </li>
                 <li class="px-3 py-3">
@@ -188,7 +188,7 @@
                         href="{{ route('register') }}"
                         class="block text-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md hover:bg-emerald-700 active:bg-emerald-800 transition-colors w-full"
                     >
-                        Register now
+                        Регистрация
                     </a>
                 </li>
             @endif
@@ -216,7 +216,7 @@
                             d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                     </svg>
-                    Cart
+                    Корзина
                     <small
                         x-show="cartItemsCount"
                         x-transition
@@ -247,7 +247,7 @@
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                My Account
+                Аккаунт
               </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -288,7 +288,7 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                                     />
                                 </svg>
-                                My Profile
+                                Профиль
                             </a>
                         </li>
                         <li>
@@ -310,7 +310,7 @@
                                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                                     />
                                 </svg>
-                                My Orders
+                                Заказы
                             </a>
                         </li>
                         <li>
@@ -335,7 +335,7 @@
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                         />
                                     </svg>
-                                    {{ __('Log Out') }}
+                                    {{ __('Выйти') }}
                                 </a>
                             </form>
                         </li>
@@ -361,7 +361,7 @@
                                 d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                             />
                         </svg>
-                        Login
+                        Войти
                     </a>
                 </li>
                 <li>
@@ -369,7 +369,7 @@
                         href="{{ route('register') }}"
                         class="inline-flex items-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md hover:bg-emerald-700 active:bg-emerald-800 transition-colors mx-5"
                     >
-                        Register now
+                        Регистрация
                     </a>
                 </li>
             @endif

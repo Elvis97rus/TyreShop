@@ -4,17 +4,17 @@
 
 <x-app-layout>
     <div class="container mx-auto lg:w-2/3 p-5">
-        <h1 class="text-3xl font-bold mb-2">My Orders</h1>
+        <h1 class="text-3xl font-bold mb-2">Мои заказы</h1>
         <div class="bg-white rounded-lg p-3 overflow-x-auto">
             <table class="table-auto w-full">
                 <thead>
                 <tr class="border-b-2">
-                    <th class="text-left p-2">Order #</th>
-                    <th class="text-left p-2">Date</th>
-                    <th class="text-left p-2">Status</th>
-                    <th class="text-left p-2">SubTotal</th>
-                    <th class="text-left p-2">Items</th>
-                    <th class="hidden text-left p-2">Actions</th>
+                    <th class="text-left p-2">Заказ #</th>
+                    <th class="text-left p-2">Дата</th>
+                    <th class="text-left p-2">Статус</th>
+                    <th class="text-left p-2">Пречек</th>
+                    <th class="text-left p-2">шт.</th>
+                    <th class="hidden text-left p-2">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@
                                                 d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
                                             />
                                         </svg>
-                                        Pay
+                                        Оплатить
                                     </button>
                                 </form>
                             @endif

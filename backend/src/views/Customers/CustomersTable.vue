@@ -27,6 +27,10 @@
                          @click="sortCustomers('id')">
           ID
         </TableHeaderCell>
+        <TableHeaderCell field="is_manager" :sort-field="sortField" :sort-direction="sortDirection"
+                         @click="sortCustomers('is_manager')">
+          Manager
+        </TableHeaderCell>
         <TableHeaderCell field="name" :sort-field="sortField" :sort-direction="sortDirection"
                          @click="sortCustomers('name')">
           Name
@@ -65,6 +69,7 @@
       <tbody v-else>
       <tr v-for="(customer, index) of customers.data">
         <td class="border-b p-2 ">{{ customer.id }}</td>
+        <td class="border-b p-2 ">{{ customer.is_manager === 1 ? 'Да' : 'Нет'}}</td>
         <td class="border-b p-2 ">
          {{ customer.first_name }} {{ customer.last_name }}
         </td>

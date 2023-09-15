@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container lg:w-2/3 xl:w-2/3 mx-auto">
-        <h1 class="text-3xl font-bold mb-6">Your Cart Items</h1>
+        <h1 class="text-3xl font-bold mb-6">Корзина</h1>
 
         <div x-data="{
             cartItems: {{
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <div class="flex items-center">
-                                            Qty:
+                                            Кол-во:
                                             <input
                                                 type="number"
                                                 min="1"
@@ -56,7 +56,7 @@
                                             href="#"
                                             @click.prevent="removeItemFromCart()"
                                             class="text-purple-600 hover:text-purple-500"
-                                        >Remove</a
+                                        >Удалить</a
                                         >
                                     </div>
                                 </div>
@@ -69,17 +69,17 @@
 
                     <div class="border-t border-gray-300 pt-4">
                         <div class="flex justify-between">
-                            <span class="font-semibold">Subtotal</span>
+                            <span class="font-semibold">Пречек</span>
                             <span id="cartTotal" class="text-xl" x-text="`&#8381;${cartTotal}`"></span>
                         </div>
                         <p class="text-gray-500 mb-6">
-                            Shipping and taxes calculated at checkout.
+                            Доставка и налоги считаются при оформлении заказа.
                         </p>
 
                         <form action="{{route('cart.checkout')}}" method="post">
                             @csrf
                             <button type="submit" class="btn-primary w-full py-3 text-lg">
-                                Proceed to Checkout
+                                Перейти к оформлению заказа
                             </button>
                         </form>
                     </div>
@@ -88,7 +88,8 @@
             </template>
             <template x-if="!cartItems.length">
                 <div class="text-center py-8 text-gray-500">
-                    You don't have any items in cart
+                    <p>Ваша корзина пуста! Добавьте в корзину хотя бы один товар.</p>
+                    <a class="text-lg font-semibold text-gray-700 underline hover:no-underline" href="{{route('home')}}">За покупками</a>
                 </div>
             </template>
 

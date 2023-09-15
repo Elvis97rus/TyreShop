@@ -17,6 +17,7 @@ class Product extends Model
     protected $fillable = ['title', 'description', 'price', 'product_type', 'image', 'published', 'image_mime', 'image_size', 'created_by', 'updated_by',
     'meta_description', 'meta_title', 'price_opt', 'price_rozn', 'rest', 'code', 'season', 'thorn', 'type', 'marka', 'model', 'img_big_my', 'img_big_pish', 'img_small'];
 
+
     /**
      * Get the options for generating the slug.
      */
@@ -36,4 +37,5 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
 }

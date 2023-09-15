@@ -8,6 +8,7 @@
         <CustomInput class="mb-2" v-model="customer.email" label="Email"/>
         <CustomInput class="mb-2" v-model="customer.phone" label="Phone"/>
         <CustomInput type="checkbox" class="mb-2" v-model="customer.status" label="Active"/>
+        <CustomInput type="checkbox" class="mb-2" v-model="customer.is_manager" label="Manager"/>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -129,6 +130,7 @@ onMounted(() => {
     .then(({data}) => {
       title.value = `Update customer: "${data.first_name} ${data.last_name}"`
       customer.value = data
+      // console.log(data, customer.value)
     })
 })
 
