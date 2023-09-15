@@ -97,7 +97,7 @@ class TestCommand extends Command
                 'img_small' => $tyre->img_small,
             ];
 
-            if ($p && $p->id) {
+            if ($p && $p->id && ($price_opt != $p->price_opt || $price_rozn != $p->price_rozn )) {
                 $p->update($data);
                 $log .= "Product ({$c} of " . count($tyres) . ") #$p->id updated! \n";
             } else {
