@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://admin.tyreshop.beget.tech'],
 
     'allowed_origins_patterns' => [],
 
