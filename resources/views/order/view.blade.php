@@ -1,5 +1,6 @@
 <x-app-layout>
-
+    @section('meta_title', 'Мои заказы - Заказ #'. $order->id . ' - ')
+    @section('meta_description', 'Страница просмотра заказа. ')
     <div class="container mx-auto lg:w-2/3 p-5">
         <h1 class="text-3xl font-bold mb-2">Заказ #{{$order->id}}</h1>
         <div class="bg-white rounded-lg p-3">
@@ -36,7 +37,7 @@
                 <div class="flex flex-col sm:flex-row items-center  gap-4">
                     <a href="{{ route('product.view', $item->product) }}"
                        class="w-36 h-32 flex items-center justify-center overflow-hidden">
-                        <img src="{{$item->product->image}}" class="object-cover" alt=""/>
+                        <img src="{{$item->product->img_small}}" class="object-cover" alt=""/>
                     </a>
                     <div class="flex flex-col justify-between">
                         <div class="flex justify-between mb-3">

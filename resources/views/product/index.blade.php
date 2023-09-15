@@ -43,7 +43,7 @@
                            @checked(isset($params) && isset($params['season']) && $params['season'] == 'winter')  name="season"
                            class="" value="winter" id="season_winter"/>
                 </span>
-                <span class="text-center">
+                <span>
                     <label class="" for="season_summer">Летние</label>
                     <input type="radio"
                            @checked(isset($params) && isset($params['season']) && $params['season'] == 'summer') name="season"

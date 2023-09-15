@@ -3,6 +3,8 @@
 ?>
 
 <x-app-layout>
+    @section('meta_title', 'Купить шины по категориям в магазине TyreShop по выгодной цене.')
+    @section('meta_description', 'Купить по брендам шины на летний и зимний сезон, 17-22 радиуса в TyreShop по удивительным ценам! Доставим быстрее всех! Товар всегда в наличии!')
     <?php if ($categories->count() === 0): ?>
         <div class="text-center text-gray-600 py-16 text-xl">
             Нет марок / брендов

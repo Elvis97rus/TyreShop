@@ -59,7 +59,7 @@ document.addEventListener("alpine:init", async () => {
           .then(result => {
             this.$dispatch('cart-change', {count: result.count})
             this.$dispatch("notify", {
-              message: "The item was added into the cart",
+              message: "Товар был добавлен в корзину",
             });
           })
           .catch(response => {
@@ -70,7 +70,7 @@ document.addEventListener("alpine:init", async () => {
         post(this.product.removeUrl)
           .then(result => {
             this.$dispatch("notify", {
-              message: "The item was removed from cart",
+              message: "Товар был удален из корзины",
             });
             this.$dispatch('cart-change', {count: result.count})
             this.cartItems = this.cartItems.filter(p => p.id !== product.id)
@@ -81,7 +81,7 @@ document.addEventListener("alpine:init", async () => {
           .then(result => {
             this.$dispatch('cart-change', {count: result.count})
             this.$dispatch("notify", {
-              message: "The item quantity was updated",
+              message: "Количество товара обновлено",
             });
           })
       },

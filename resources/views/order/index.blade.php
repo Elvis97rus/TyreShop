@@ -3,22 +3,25 @@
 ?>
 
 <x-app-layout>
+    @section('meta_title', 'Мои заказы - ')
+    @section('meta_description', 'Страница просмотра совершенных заказов. ')
     <div class="container mx-auto lg:w-2/3 p-5">
         <h1 class="text-3xl font-bold mb-2">Мои заказы</h1>
         <div class="bg-white rounded-lg p-3 overflow-x-auto">
             <table class="table-auto w-full">
                 <thead>
                 <tr class="border-b-2">
-                    <th class="text-left p-2">Заказ #</th>
+                    <th class="text-left p-2">Контактное лицо</th>
                     <th class="text-left p-2">Дата</th>
                     <th class="text-left p-2">Статус</th>
-                    <th class="text-left p-2">Пречек</th>
-                    <th class="text-left p-2">шт.</th>
-                    <th class="hidden text-left p-2">Действия</th>
+                    <th class="text-left p-2">Цена</th>
+                    <th class="text-left p-2">Кол-во</th>
+                    <th class="text-left p-2">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($orders as $order)
+                    @dd($order)
                     <tr class="border-b">
                         <td class="py-1 px-2">
                             <a
@@ -37,7 +40,13 @@
                             >
                         </td>
                         <td class="py-1 px-2">&#8381;{{$order->total_price}}</td>
-                        <td class="py-1 px-2 whitespace-nowrap">{{$order->items_count}} item(s)</td>
+                        <td class="py-1 px-2 whitespace-nowrap">{{$order->items_count}} шт.</td>
+                        <td class="py-1 px-2 whitespace-nowrap"><a
+                                href="{{ route('order.view', $order) }}"
+                                class="text-purple-600 hover:text-purple-500"
+                            > Смотрть заказ
+                            </a>
+                        </td>
                         <td class="hidden py-1 px-2 flex gap-2 w-[100px]">
                             @if (!$order->isPaid())
                                 <form action="{{ route('cart.checkout-order', $order) }}"

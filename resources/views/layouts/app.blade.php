@@ -29,12 +29,13 @@
     x-transition
     x-cloak
     @notify.window="show($event.detail.message)"
-    class="fixed w-[400px] left-1/2 -ml-[200px] top-16 py-2 px-4 pb-4 bg-emerald-500 text-white"
+    class="fixed w-[400px] left-1/2 -ml-[200px] top-16 py-2 px-4 pb-4 bg-transparent text-white"
 >
-    <div class="font-semibold" x-text="message"></div>
+    <div class="font-semibold bg-emerald-600 px-6 py-2 pb-4" x-text="message"></div>
+
     <button
         @click="close"
-        class="absolute flex items-center justify-center right-2 top-2 w-[30px] h-[30px] rounded-full hover:bg-black/10 transition-colors"
+        class="absolute flex items-center justify-center right-4 top-4 w-[30px] h-[30px] rounded-full hover:bg-black/10 transition-colors"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"

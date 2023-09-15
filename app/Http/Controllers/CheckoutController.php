@@ -10,8 +10,10 @@ use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,6 +24,14 @@ class CheckoutController extends Controller
         /** @var \App\Models\User $user */
         $user = $request->user();
 
+        /** @var \App\Models\Customer $customer */
+        $customer = $user->customer;
+
+        if (!$customer->shippingAddress){
+            $request->session()->flash('flash_message', 'Заполните профиль');
+
+            return redirect()->route('profile');
+        }
 //        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
 
         [$products, $cartItems] = Cart::getProductsAndCartItems();
@@ -57,13 +67,28 @@ class CheckoutController extends Controller
 //            'cancel_url' => route('checkout.failure', [], true),
 //        ]);
 
+        $customer_info = "<p>Имя: $customer->first_name $customer->last_name <br> Телефон: $customer->phone <br>Почта: " . $customer->delivery_email ?? $user->email."</p>";
+        $order_details = "<div class='flex flex-col p-4 w-full'>" . $customer_info;
+        foreach ($orderItems as $orderItem){
+            $product = Product::find($orderItem['product_id']);
+            $order_details .= "<p class='py-2'>Название: $product->title <br> Кол-во: {$orderItem['quantity']} шт. <br>Цена/шт: {$orderItem['unit_price']} руб. </p>";
+        }
+        $order_details .= "<p class='py-2'>Сумма: $totalPrice руб.</p></div>";
+
+
         // Create Order
         $orderData = [
             'total_price' => $totalPrice,
             'status' => OrderStatus::Unpaid,
             'created_by' => $user->id,
             'updated_by' => $user->id,
+            'updated_by' => $user->id,
+            'order_details' => $order_details,
+            'contact_name' => "$customer->first_name $customer->last_name",
+            'contact_phone' => $customer->phone,
+            'contact_email' => $customer->delivery_email ?? $user->email,
         ];
+//        dd($orderData);
         $order = Order::create($orderData);
 
         // Create Order Items
@@ -86,7 +111,10 @@ class CheckoutController extends Controller
 
         CartItem::where(['user_id' => $user->id])->delete();
 
-        $customer = auth()->user();
+        //$customer = auth()->user()->customer;
+        foreach ([config('app.mail_from'), $order->contact_email] as $recipient) {
+            Mail::to($recipient)->queue(new NewOrderEmail($order, $recipient));
+        }
         return view('checkout.success', compact('customer'));
 //        return redirect($session->url);
     }

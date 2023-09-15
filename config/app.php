@@ -17,6 +17,11 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'four_tochki_login' => env('TOCHKI_LOGIN', ''),
+    'four_tochki_pass' => env('TOCHKI_PASSWORD', ''),
+
+    'mail_from' => env('MAIL_FROM_ADDRESS', 'order@tyreshop.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

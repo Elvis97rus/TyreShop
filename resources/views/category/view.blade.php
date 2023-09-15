@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('meta_title', $category->meta_title ?? $category->title)
+    @section('meta_description', $category->meta_description ?? $category->title)
+
     <div  class="mx-auto">
         <div class="flex justify-between flex-col md:flex-row ">
             <div class="w-full md:w-1/3">

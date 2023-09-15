@@ -28,6 +28,7 @@ class ProfileController extends Controller
 
     public function store(ProfileRequest $request)
     {
+//        dd($request->all());
         $customerData = $request->validated();
         $shippingData = $customerData['shipping'];
         $billingData = $customerData['billing'];
@@ -54,7 +55,7 @@ class ProfileController extends Controller
             CustomerAddress::create($billingData);
         }
 
-        $request->session()->flash('flash_message', 'Profile was successfully updated.');
+        $request->session()->flash('flash_message', 'Данные профиля успешно обновлены.');
 
         return redirect()->route('profile');
 
@@ -70,7 +71,7 @@ class ProfileController extends Controller
         $user->password = Hash::make($passwordData['new_password']);
         $user->save();
 
-        $request->session()->flash('flash_message', 'Your password was successfully updated.');
+        $request->session()->flash('flash_message', 'Пароль профиля успешно обновлен.');
 
         return redirect()->route('profile');
     }

@@ -1,6 +1,7 @@
-<x-app-layout>
+<x-app-layout :meta_title="$product->meta_title ?? $product->title">
     @section('meta_title', $product->meta_title ?? $product->title)
     @section('meta_description', $product->meta_description ?? $product->title)
+{{--    {{dd($product->meta_title)}}--}}
     <div  x-data="productItem({{ json_encode([
                     'id' => $product->id,
                     'slug' => $product->slug,

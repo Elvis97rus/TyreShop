@@ -8,18 +8,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrderEmail extends Mailable
+class NewOrderEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-
+    public $forAdmin;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(public Order $order, public $forAdmin = true)
+    public function __construct(public Order $order, public $recipient)
     {
-
+        $this->forAdmin = config('app.mail_from') == $this->recipient;
     }
 
     /**
@@ -30,7 +30,8 @@ class NewOrderEmail extends Mailable
     public function build()
     {
         return $this
-            ->subject('New Order')
+            ->subject('Создан новый заказ в магазине TyreShop')
+            ->to($this->recipient)
             ->view('mail.new-order');
     }
 }

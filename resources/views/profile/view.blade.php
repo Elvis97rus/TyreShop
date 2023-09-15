@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('meta_title', 'Детальные данные заказа и доставки - ')
+    @section('meta_description', 'Страница просмотра и изменения данных для заказе и доставки. ')
     <div x-data="{
             flashMessage: '{{\Illuminate\Support\Facades\Session::get('flash_message')}}',
             init() {
@@ -66,6 +68,16 @@
                             name="email"
                             value="{{old('email', $user->email)}}"
                             placeholder="Почта"
+                            readonly=""
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 bg-gray-200 rounded cursor-pointer"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <x-input
+                            type="text"
+                            name="delivery_email"
+                            value="{{old('delivery_email', $customer->delivery_email)}}"
+                            placeholder="Дополнительная почта для доставки"
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
                         />
                     </div>
