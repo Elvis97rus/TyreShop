@@ -229,6 +229,7 @@ function showAddNewModal() {
 }
 
 function deleteUser(user) {
+  console.log(user)
   if (!confirm(`Are you sure you want to delete the user?`)) {
     return
   }

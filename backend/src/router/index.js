@@ -19,13 +19,13 @@ import CustomersReport from "../views/Reports/CustomersReport.vue";
 
 const routes = [
   {
-    path: '/',
-    redirect: '/app'
+    path: '/app',
+    redirect: '/'
   },
   {
-    path: '/app',
+    path: '/',
     name: 'app',
-    redirect: '/app/dashboard',
+    redirect: '/dashboard',
     component: AppLayout,
     meta: {
       requiresAuth: true
