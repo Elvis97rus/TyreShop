@@ -1,11 +1,11 @@
 <x-app-layout>
-    @section('meta_title', $category->meta_title ?? $category->title)
-    @section('meta_description', $category->meta_description ?? $category->title)
+    @section('meta_title', $category->meta_title ?? "Купить шины $category->name в нашем мазагине" )
+    @section('meta_description', $category->meta_description ?? "Купить шины $category->name по привлекательной цене в мазагине TyreShop. Оставляйте заказ и мы с вами свяжемся. " )
 
     <div  class="mx-auto">
         <div class="flex justify-between flex-col md:flex-row ">
             <div class="w-full md:w-1/3">
-                <h1 class="text-center text-gray-600 py-4 text-xl">Бренд / Марка {{$category->name}}</h1>
+                <h1 class="text-center text-gray-600 py-4 text-xl">Шины {{$category->name}}</h1>
                 <div class="p-4">
                     <img class="mx-auto" src="{{$category->image ?? 'https://place-hold.it/500x300'}}" alt="Шины бренда {{$category->name}}">
                 </div>
