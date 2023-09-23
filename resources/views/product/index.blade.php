@@ -60,7 +60,7 @@
     </div>
     <?php else: ?>
     <div
-        class="grid gap-6 grid-cols-6 lg:grid-cols-5 p-5"
+        class="grid gap-6 grid-cols-2 lg:grid-cols-5 p-5"
     >
         @foreach($products as $product)
             <!-- Product Item -->
@@ -103,7 +103,7 @@
                                 <p class="font-semibold">Доставка со склада: {{\App\Services\WarehouseService::logisticDays($rest->wrh) != '0' ?: '1'}} д.</p>
                             @endif
                         </div>
-                        <div class="flex flex-row justify-end py-2">
+                        <div class="flex flex-col justify-between py-2">
                             @if(auth()->user() && (!auth()->user()->customer || auth()->user()->customer->is_manager))
                                 <div>
                                     <p class="font-semibold text-gray-400 py-2">Опт. &#8381;{{$product->price_opt}}</p>
