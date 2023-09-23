@@ -56,7 +56,7 @@ class TestCommand extends Command
         $warehouses = $answer->GetFindTyreResult->warehouseLogistics->WarehouseLogistic;
 
         // снимаем товары с публикации перед синхронизацией
-//        Product::where('product_type', 'tyre')->update(['published' => false]);
+        Product::where('product_type', 'tyre')->update(['published' => false]);
         $c = 1;
         $log = "SYNC TYRES LOG \n*************\n";
         foreach ($tyres as $tyre) {
@@ -75,29 +75,20 @@ class TestCommand extends Command
             $price_rozn = !is_array($tyre->whpr->wh_price_rest) ? $tyre->whpr->wh_price_rest->price_rozn: $tyre->whpr->wh_price_rest[0]->price_rozn;
 
             $p = Product::where('code', 'tyre_' . $tyre->code)->first();
-            $data = [
-                'title' => $tyre->marka . ' ' . $tyre->name . '. арт.' . $tyre->code,
-                'description' => $tyre->marka . ' ' . $tyre->name,
-                'price' => !is_array($tyre->whpr->wh_price_rest) ? $tyre->whpr->wh_price_rest->price_rozn * 0.95 : $tyre->whpr->wh_price_rest[0]->price_rozn * 0.95,
-                'product_type' => 'tyre',
-                'published' => true,
-                'meta_description' => $tyre->marka . ' ' . $tyre->name,
-                'meta_title' => $tyre->marka . ' ' . $tyre->name,
-                'price_opt' => $price_opt,
-                'price_rozn' => $price_rozn,
-                'rest' => json_encode($tyre->whpr->wh_price_rest),
-                'season' => $tyre->season,
-                'code' => 'tyre_' . $tyre->code,
-                'thorn' => $tyre->thorn,
-                'type' => $tyre->type ?? 'none',
-                'marka' => $tyre->marka,
-                'model' => $tyre->model,
-                'img_big_my' => $tyre->img_big_my,
-                'img_big_pish' => $tyre->img_big_pish,
-                'img_small' => $tyre->img_small,
-            ];
+
 
             if ($p && $p->id) {
+                $data = [
+                    'price' => !is_array($tyre->whpr->wh_price_rest) ? $tyre->whpr->wh_price_rest->price_rozn * 0.95 : $tyre->whpr->wh_price_rest[0]->price_rozn * 0.95,
+                    'published' => true,
+                    'price_opt' => $price_opt,
+                    'price_rozn' => $price_rozn,
+                    'rest' => json_encode($tyre->whpr->wh_price_rest),
+                    'img_big_my' => $tyre->img_big_my,
+                    'img_big_pish' => $tyre->img_big_pish,
+                    'img_small' => $tyre->img_small,
+                ];
+
                 if (($price_opt != $p->price_opt || $price_rozn != $p->price_rozn )) {
                     $p->update($data);
                 }
@@ -107,10 +98,34 @@ class TestCommand extends Command
                     $storage_path = ImageHelper::saveTyreImage($tyre);
                     $data['image'] = $storage_path;
                 }catch (\Exception $e){
-                    $this->info($e->getMessage());
+                    Log::build([
+                        'driver' => 'single',
+                        'path' => storage_path('logs/tyres-sync.log'),
+                    ])->info(print_r(['IMAGE DOWNLOAD ERROR', "$tyre->code ", $e->getMessage()],1));
                 }
                 // Сохраняем картинку
 
+                $data = [
+                    'title' => $tyre->marka . ' ' . $tyre->name . '. арт.' . $tyre->code,
+                    'description' => $tyre->marka . ' ' . $tyre->name,
+                    'price' => !is_array($tyre->whpr->wh_price_rest) ? $tyre->whpr->wh_price_rest->price_rozn * 0.95 : $tyre->whpr->wh_price_rest[0]->price_rozn * 0.95,
+                    'product_type' => 'tyre',
+                    'published' => true,
+                    'meta_description' => $tyre->marka . ' ' . $tyre->name,
+                    'meta_title' => $tyre->marka . ' ' . $tyre->name,
+                    'price_opt' => $price_opt,
+                    'price_rozn' => $price_rozn,
+                    'rest' => json_encode($tyre->whpr->wh_price_rest),
+                    'season' => $tyre->season,
+                    'code' => 'tyre_' . $tyre->code,
+                    'thorn' => $tyre->thorn,
+                    'type' => $tyre->type ?? 'none',
+                    'marka' => $tyre->marka,
+                    'model' => $tyre->model,
+                    'img_big_my' => $tyre->img_big_my,
+                    'img_big_pish' => $tyre->img_big_pish,
+                    'img_small' => $tyre->img_small,
+                ];
 
                 $p = Product::create($data);
 
@@ -123,9 +138,9 @@ class TestCommand extends Command
 
             $this->info($c++ ." of " . count($tyres));
         }
-        Log::build([
-            'driver' => 'single',
-            'path' => storage_path('logs/tyres-sync.log'),
-        ])->info(print_r($log,1));
+//        Log::build([
+//            'driver' => 'single',
+//            'path' => storage_path('logs/tyres-sync.log'),
+//        ])->info(print_r($log,1));
     }
 }
