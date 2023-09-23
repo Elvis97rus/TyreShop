@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                 @foreach($orders as $order)
-                    @dd($order)
+{{--                    @dd($order)--}}
                     <tr class="border-b">
                         <td class="py-1 px-2">
                             <a

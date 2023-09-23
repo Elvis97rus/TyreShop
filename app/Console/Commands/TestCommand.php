@@ -93,6 +93,7 @@ class TestCommand extends Command
                     $p->update($data);
                 }
                 $log .= "Product ({$c} of " . count($tyres) . ") #$p->id updated! \n";
+                $this->info("Product ({$c} of " . count($tyres) . ") #$p->id updated! \n");
             } else {
                 try {
                     $storage_path = ImageHelper::saveTyreImage($tyre);
@@ -134,6 +135,7 @@ class TestCommand extends Command
                 $p->save();
 
                 $log .= "Product ({$c} of " . count($tyres) . ") #$p->id created! \n";
+                $this->info( "Product ({$c} of " . count($tyres) . ") #$p->id created! \n");
             }
 
             $this->info($c++ ." of " . count($tyres));
