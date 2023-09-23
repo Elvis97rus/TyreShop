@@ -56,7 +56,7 @@ class TestCommand extends Command
         $warehouses = $answer->GetFindTyreResult->warehouseLogistics->WarehouseLogistic;
 
         // снимаем товары с публикации перед синхронизацией
-        Product::where('product_type', 'tyre')->update(['published' => false]);
+//        Product::where('product_type', 'tyre')->update(['published' => false]);
         $c = 1;
         $log = "SYNC TYRES LOG \n*************\n";
         foreach ($tyres as $tyre) {
