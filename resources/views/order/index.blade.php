@@ -15,7 +15,7 @@
                     <th class="text-left p-2">Дата</th>
                     <th class="text-left p-2">Статус</th>
                     <th class="text-left p-2">Цена</th>
-                    <th class="text-left p-2">Кол-во</th>
+                    <th class="text-left p-2">Кол-во поз.</th>
                     <th class="text-left p-2">Действия</th>
                 </tr>
                 </thead>
