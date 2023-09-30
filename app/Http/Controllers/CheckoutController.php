@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
+use App\Services\TelegramOrdersService;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
@@ -66,15 +67,15 @@ class CheckoutController extends Controller
 //            'success_url' => route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
 //            'cancel_url' => route('checkout.failure', [], true),
 //        ]);
-
+        $address = $customer->getAddress();
         $customer_info = "<p>Имя: $customer->first_name $customer->last_name <br> Телефон: $customer->phone <br>Почта: " . $customer->delivery_email ?? $user->email."</p>";
-        $order_details = "<div class='flex flex-col p-4 w-full'>" . $customer_info;
+        $customer_address = "<p>Адрес доставки: $address->city, $address->address1, $address->address2, $address->zipcode, $address->state</p>";
+        $order_details = "<div class='flex flex-col p-4 w-full'>" . $customer_info . $customer_address;
         foreach ($orderItems as $orderItem){
             $product = Product::find($orderItem['product_id']);
             $order_details .= "<p class='py-2'>Название: $product->title <br> Кол-во: {$orderItem['quantity']} шт. <br>Цена/шт: {$orderItem['unit_price']} руб. </p>";
         }
         $order_details .= "<p class='py-2'>Сумма: $totalPrice руб.</p></div>";
-
 
         // Create Order
         $orderData = [
@@ -82,14 +83,15 @@ class CheckoutController extends Controller
             'status' => OrderStatus::Unpaid,
             'created_by' => $user->id,
             'updated_by' => $user->id,
-            'updated_by' => $user->id,
             'order_details' => $order_details,
             'contact_name' => "$customer->first_name $customer->last_name",
             'contact_phone' => $customer->phone,
             'contact_email' => $customer->delivery_email ?? $user->email,
         ];
-//        dd($orderData);
+
         $order = Order::create($orderData);
+        $tg = new TelegramOrdersService();
+        $tg->sendOrderDetails($order, $address);
 
         // Create Order Items
         foreach ($orderItems as $orderItem) {

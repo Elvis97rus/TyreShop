@@ -34,4 +34,8 @@ class Customer extends Model
     {
         return $this->_getAddresses()->where('type', '=', AddressType::Billing->value);
     }
+
+    public function getAddress(){
+        return $this->shippingAddress()->where('customer_id', $this->user_id)->first();
+    }
 }

@@ -19,6 +19,8 @@ return [
 
     'four_tochki_login' => env('TOCHKI_LOGIN', ''),
     'four_tochki_pass' => env('TOCHKI_PASSWORD', ''),
+    'telegram_chat_id' => env('TELEGRAM_ORDERS_CHANNEL_ID', ''),
+    'telegram_bot_api' => env('TELEGRAM_BOT_API', ''),
 
     'mail_from' => env('MAIL_FROM_ADDRESS', 'order@tyreshop.com'),
 
