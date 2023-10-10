@@ -43,7 +43,7 @@
             </div>
             <?php else: ?>
             <div
-                class="grid gap-6 grid-cols-2 lg:grid-cols-5 p-5"
+                class="grid gap-4 md:gap-6 grid-cols-2 lg:grid-cols-5 p-4 md:p-5"
             >
                 @foreach($category->products->where('published', 1) as $product)
                     <!-- Product Item -->
