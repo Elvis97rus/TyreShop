@@ -5,16 +5,16 @@
 <x-app-layout>
     @section('meta_title', 'Купить шины в магазине TyreShop по выгодной цене.')
     @section('meta_description', 'В магазине TyreShop вы найдете зимние и летние шины от 17 до 22 радиуса, по удивительным ценам! Звоните, спешите купить! Всё что представлено - в наличии!')
-    <div class="container">
-        <form method="POST" action="{{route('home.search')}}" class="flex w-full">
+    <div class="">
+        <form method="POST" action="{{route('home.search')}}" class="flex w-full flex-wrap md:flex-nowrap justify-around gap-2">
             @csrf
             @method('POST')
             <input name="search"
                    class="appearance-none relative block mw-100 w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Поиск товаров... (например Pirelli 215/65 или 255/65R17)">
-            <select name="brand" id="brand" class="ml-3 px-4">
+            <select name="brand" id="brand" class="ml-3 px-2 md:px-4">
                 <option value="" name="search"
-                        class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        class="appearance-none relative block w-48 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                     Марка шин
                 </option>
                 @foreach($categories as $category)
@@ -24,13 +24,13 @@
                     </option>
                 @endforeach
             </select>
-            <div class="flex p-3">
+            <div class="flex p-2 md:p-3">
                 <label for="thorn" class="m-auto p-2">Шипы</label>
                 <input type="checkbox"
                        @checked(isset($params) && isset($params['thorn']) && $params['thorn'] == 'on') name="thorn"
                        class="p-2 m-auto" id="thorn"/>
             </div>
-            <div class="px-4 py-3 flex justify-between m-auto w-1/4">
+            <div class="px-4 py-3 flex justify-between m-auto md:w-1/4 gap-2">
                 <span class="text-center">
                     <label class="" for="season_all">Все</label>
                     <input type="radio"
