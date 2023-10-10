@@ -67,7 +67,7 @@
                             />
                         </a>
                         <div class="p-4">
-                            <h3 class="text-lg">
+                            <h3 class="text-md md:text-lg">
                                 <a href="{{ route('product.view', $product->slug) }}">
                                     {{$product->title}}
                                 </a>
