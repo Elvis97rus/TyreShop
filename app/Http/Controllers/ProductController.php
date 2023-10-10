@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::query()->orderBy('name', 'asc')->get();
         $products = Product::query()
             ->where('product_type', '=', 'tyre')
             ->where('published', '=', 1)
@@ -21,7 +21,7 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::query()->orderBy('name', 'asc')->get();
         $products = Product::query()
             ->where('published', '=', 1)
             ->where('product_type', '=', 'tyre');
