@@ -6,15 +6,46 @@
     @section('meta_title', 'Купить шины в магазине TyreShop по выгодной цене.')
     @section('meta_description', 'В магазине TyreShop вы найдете зимние и летние шины от 17 до 22 радиуса, по удивительным ценам! Звоните, спешите купить! Всё что представлено - в наличии!')
     <div class="">
-        <form method="POST" action="{{route('home.search')}}" class="flex w-full flex-wrap md:flex-nowrap justify-around gap-2">
+        <form method="POST" action="{{route('home.search')}}" class="flex w-full flex-wrap xl:flex-nowrap justify-center xl:justify-around xl:gap-2 gap-1">
             @csrf
             @method('POST')
             <input name="search"
-                   class="appearance-none relative block mw-100 w-full px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   class="appearance-none relative block mw-100 w-full md:w-1/4 px-4 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Поиск товаров... (например Pirelli 215/65 или 255/65R17)">
-            <select name="brand" id="brand" class="ml-3 px-2 md:px-4">
-                <option value="" name="search"
-                        class="appearance-none relative block w-48 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+
+            <select name="width" id="width" class="w-32 ml-3 px-2 md:px-4">
+                <option value="" name="width"
+                        class="appearance-none relative block w-32 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                    Ширина
+                </option>
+                @for($i = config('app.tyres_width_from'); $i < config('app.tyres_width_to') + 1; $i+=5)
+                <option @selected(isset($params) && isset($params['width']) && $params['width'] == $i)
+                        value="{{$i}}" name="search">{{$i}}</option>
+                @endfor
+            </select>
+            <select name="height" id="height" class="w-32 ml-3 px-2 md:px-4">
+                <option value="" name="height"
+                        class="appearance-none relative block w-32 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                    Высота
+                </option>
+                @for($i = config('app.tyres_height_from'); $i < config('app.tyres_height_to') + 1; $i+=5)
+                <option @selected(isset($params) && isset($params['height']) && $params['height'] == $i)
+                        value="{{$i}}" name="search">{{$i}}</option>
+                @endfor
+            </select>
+            <select name="radius" id="radius" class="w-32 ml-3 px-2 md:px-4">
+                <option value="" name="radius"
+                        class="appearance-none relative block w-32 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                    Радиус
+                </option>
+                @for($i = config('app.tyres_radius_from'); $i < config('app.tyres_radius_to') + 1; $i+=1)
+                <option @selected(isset($params) && isset($params['radius']) && $params['radius'] == $i)
+                    value="{{$i}}" name="search">{{$i}}</option>
+                @endfor
+            </select>
+            <select name="brand" id="brand" class="w-36 ml-3 px-2 md:px-4">
+                <option value="" name="brand"
+                        class="appearance-none relative block w-36 px-3 py-1 md:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                     Марка шин
                 </option>
                 @foreach($categories as $category)
@@ -30,7 +61,7 @@
                        @checked(isset($params) && isset($params['thorn']) && $params['thorn'] == 'on') name="thorn"
                        class="p-2 m-auto" id="thorn"/>
             </div>
-            <div class="px-4 py-3 flex justify-between m-auto md:w-1/4 gap-2">
+            <div class="px-4 py-3 flex justify-between m-auto gap-2">
                 <span class="text-center">
                     <label class="" for="season_all">Все</label>
                     <input type="radio"
@@ -51,7 +82,7 @@
                 </span>
             </div>
 
-            <input type="submit" class="btn btn-primary btn-danger w-48" value="Поиск"/>
+            <input type="submit" class="btn btn-primary btn-danger w-1/4 xl:w-48" value="Поиск"/>
         </form>
     </div>
     <?php if ($products->count() === 0): ?>

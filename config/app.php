@@ -22,7 +22,14 @@ return [
     'telegram_chat_id' => env('TELEGRAM_ORDERS_CHANNEL_ID', ''),
     'telegram_bot_api' => env('TELEGRAM_BOT_API', ''),
 
-    'mail_from' => env('MAIL_FROM_ADDRESS', 'order@tyreshop.com'),
+    'tyres_width_from' => env('TYRE_WIDTH_FROM', '175'),
+    'tyres_width_to' => env('TYRE_WIDTH_TO', '235'),
+    'tyres_height_from' => env('TYRE_HEIGHT_FROM', '55'),
+    'tyres_height_to' => env('TYRE_HEIGHT_TO', '75'),
+    'tyres_radius_from' => env('TYRE_RADIUS_FROM', '17'),
+    'tyres_radius_to' => env('TYRE_RADIUS_TO', '22'),
+
+    'mail_from' => env('MAIL_FROM_ADDRESS', 'info@moscow-tyre.ru'),
 
     /*
     |--------------------------------------------------------------------------

@@ -21,6 +21,7 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
+//        dd($request);
         $categories = Category::query()->orderBy('name', 'asc')->get();
         $products = Product::query()
             ->where('published', '=', 1)
@@ -31,6 +32,12 @@ class ProductController extends Controller
         }
         if (isset($request->search) && strlen($request->search) > 0){
             $products = $products->where('title', 'like',  '%'.$request->search.'%');
+        }
+        if (isset($request->width) && isset($request->height) && strlen($request->height) > 0 && strlen($request->width) > 0){
+            $products = $products->where('title', 'like',  '%'.$request->width.'/'. $request->height.'%');
+        }
+        if (isset($request->radius) && strlen($request->radius) > 0){
+            $products = $products->where('title', 'like',  '%R'.$request->radius.'%');
         }
         if (isset($request->brand) && strlen($request->brand) > 0){
             $products = $products->where('marka', $request->brand);
@@ -50,6 +57,9 @@ class ProductController extends Controller
             'search' => $request->search,
             'brand' => $request->brand,
             'season' => $request->season,
+            'height' => $request->height,
+            'width' => $request->width,
+            'radius' => $request->radius,
         ];
         return view('product.index', compact('products', 'categories', 'params'));
     }
